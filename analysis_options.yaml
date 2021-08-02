@@ -1,6 +1,11 @@
-include: package:lint/analysis_options.yaml;
+include: package:very_good_analysis/analysis_options.yaml
 
 analyzer:
   exclude:
     - "**/*.g.dart"
     - "**/*.freezed.dart"
+linter:
+  rules:
+    public_member_api_docs: false
+    avoid_dynamic_calls: false
+    implementation_imports: false
