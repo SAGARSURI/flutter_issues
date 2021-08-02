@@ -14,7 +14,7 @@ ThemeData get lightTheme => ThemeData(
       onPrimary: Colors.black,
       background: Colors.grey[50],
       error: Colors.red,
-      onBackground: Colors.white60
+      onBackground: Colors.white60,
     ));
 
 ThemeData get darkTheme => ThemeData(
@@ -26,10 +26,9 @@ ThemeData get darkTheme => ThemeData(
     brightness: Brightness.dark,
     scaffoldBackgroundColor: Colors.black45,
     colorScheme: const ColorScheme.dark().copyWith(
-      primary: Colors.black38,
-      primaryVariant: Colors.black87,
-      onPrimary: Colors.white,
-      background: Colors.black45,
-      error: Colors.red[300],
-      onBackground: Colors.grey[800]
-    ));
+        primary: Colors.black38,
+        primaryVariant: Colors.black87,
+        onPrimary: Colors.white,
+        background: Colors.black45,
+        error: Colors.red[300],
+        onBackground: Colors.grey[800]));

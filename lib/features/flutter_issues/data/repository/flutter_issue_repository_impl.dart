@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter_issues/features/flutter_issues/data/model/json_flutter_issue.dart';
 import 'package:flutter_issues/features/flutter_issues/domain/model/flutter_issue.dart';
 import 'package:flutter_issues/features/flutter_issues/domain/model/flutter_issue_error.dart';
@@ -21,14 +23,20 @@ class FlutterIssueRepositoryImpl implements FlutterIssueRepository {
       required String state,
       required int page,
       List<String> label = const []}) async {
-    final response = await _client.get(
-        'repos/flutter/flutter/issues?state=$state&labels=${label.join(',')}&sort=$sort&page=$page');
-    return response.when(success: (String data) {
-      return Either.right(
-          _mapJsonFlutterIssues(jsonFlutterIssueFromJson(data)));
-    }, error: (ResponseError error) {
-      return Either.left(_mapFlutterIssueError(error));
-    });
+    try {
+      final response = await _client.get(
+          'repos/flutter/flutter/issues?state=$state&labels=${label.join(',')}&sort=$sort&page=$page');
+      return response.when(success: (String data) {
+        return Either.right(
+            _mapJsonFlutterIssues(jsonFlutterIssueFromJson(data)));
+      }, error: (ResponseError error) {
+        return Either.left(_mapFlutterIssueError(error));
+      });
+    } on SocketException catch (_) {
+      return Either.left(const FlutterIssueError.connectivityError());
+    } on Exception catch (_) {
+      return Either.left(const FlutterIssueError.genericError());
+    }
   }
 
   FlutterIssueError _mapFlutterIssueError(ResponseError error) {

@@ -69,10 +69,11 @@ class _FlutterIssuesScreenState extends State<FlutterIssuesScreen> {
           final viewModel = watch(issuesProvider);
           return viewModel.when(loading: () {
             return Center(
-                child: CircularProgressIndicator(
-              valueColor: AlwaysStoppedAnimation<Color>(
-                  Theme.of(context).colorScheme.onPrimary),
-            ));
+              child: CircularProgressIndicator(
+                valueColor: AlwaysStoppedAnimation<Color>(
+                    Theme.of(context).colorScheme.onPrimary),
+              ),
+            );
           }, success: (data) {
             return Padding(
               padding: const EdgeInsets.all(8.0),
@@ -82,12 +83,31 @@ class _FlutterIssuesScreenState extends State<FlutterIssuesScreen> {
             return error.when(genericError: () {
               return const Center(child: Text(genericErrorMessage));
             }, connectivityError: () {
-              return const Center(child: Text(connectivityErrorMessage));
+              return Center(
+                  child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const Text(connectivityErrorMessage),
+                  const SizedBox(height: 8.0),
+                  ElevatedButton(
+                    onPressed: () => _retry(context),
+                    child: const Text(retryLabel),
+                  )
+                ],
+              ));
             });
           });
         });
       }),
     );
+  }
+
+  void _retry(BuildContext context) {
+    final selectedIssueState = context.read(issueStateProvider);
+    final selectedSortType = context.read(sortProvider);
+    context
+        .read(issuesProvider.notifier)
+        .getIssues(selectedSortType, selectedIssueState, 1);
   }
 
   FlutterIssuesWidget _issuesListView(
