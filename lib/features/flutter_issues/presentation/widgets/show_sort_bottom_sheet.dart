@@ -14,6 +14,7 @@ Future<T?> showSortBottomSheet<T>(BuildContext context) {
           shrinkWrap: true,
           itemBuilder: (context, index) {
             return ListTile(
+              key: ValueKey(sortTypes[index].name),
               title: Text(sortTypes[index].name),
               onTap: () {
                 _sortIssuesBy(context, sortTypes[index]);

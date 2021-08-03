@@ -50,10 +50,12 @@ class _FlutterIssuesScreenState extends State<FlutterIssuesScreen> {
         title: const Text(issuesScreenTitle),
         actions: [
           PopupMenuButton<String>(
+            key: const ValueKey(menuButtonKey),
             onSelected: (value) => handleClick(value, context),
             itemBuilder: (BuildContext context) {
               return {sortLabel, filterLabel}.map((String choice) {
                 return PopupMenuItem<String>(
+                  key: ValueKey(choice),
                   value: choice,
                   child: Text(choice),
                 );
