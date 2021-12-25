@@ -54,8 +54,7 @@ void main() {
 
   testGoldens('connectivity error screen', (tester) async {
     when(() => _mockRepository.issues(sort: 'created', state: 'open', page: 1))
-        .thenAnswer((invocation) => Future.value(
-            Either.left(const FlutterIssueError.connectivityError())));
+        .thenAnswer((invocation) => Future.value(Either.left(const FlutterIssueError.connectivityError())));
 
     final builder = DeviceBuilder()
       ..overrideDevicesForAllScenarios(devices: [Device.phone])
@@ -68,8 +67,7 @@ void main() {
 
   testGoldens('generic error screen', (tester) async {
     when(() => _mockRepository.issues(sort: 'created', state: 'open', page: 1))
-        .thenAnswer((invocation) => Future.value(
-        Either.left(const FlutterIssueError.genericError())));
+        .thenAnswer((invocation) => Future.value(Either.left(const FlutterIssueError.genericError())));
 
     final builder = DeviceBuilder()
       ..overrideDevicesForAllScenarios(devices: [Device.phone])

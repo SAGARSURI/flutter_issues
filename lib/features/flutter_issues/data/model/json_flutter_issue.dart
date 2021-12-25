@@ -8,8 +8,7 @@ part 'json_flutter_issue.freezed.dart';
 part 'json_flutter_issue.g.dart';
 
 List<JsonFlutterIssue> jsonFlutterIssueFromJson(String str) =>
-    List<JsonFlutterIssue>.from(
-        json.decode(str).map((x) => JsonFlutterIssue.fromJson(x)));
+    List<JsonFlutterIssue>.from(json.decode(str).map((x) => JsonFlutterIssue.fromJson(x)));
 
 String jsonFlutterIssueToJson(List<JsonFlutterIssue> data) =>
     json.encode(List<Map<String, dynamic>>.from(data.map((x) => x.toJson())));
@@ -24,14 +23,12 @@ class JsonFlutterIssue with _$JsonFlutterIssue {
     JsonUser? assignee,
     @Default(<JsonUser>[]) List<JsonUser> assignees,
     required int comments,
-    @JsonKey(name: 'created_at')
-    required DateTime createdAt,
+    @JsonKey(name: 'created_at') required DateTime createdAt,
     JsonPullRequest? pullRequest,
     @Default(<JsonLabel>[]) List<JsonLabel> labels,
   }) = _JsonFlutterIssue;
 
-  factory JsonFlutterIssue.fromJson(Map<String, dynamic> json) =>
-      _$JsonFlutterIssueFromJson(json);
+  factory JsonFlutterIssue.fromJson(Map<String, dynamic> json) => _$JsonFlutterIssueFromJson(json);
 }
 
 @freezed
@@ -43,8 +40,7 @@ class JsonPullRequest with _$JsonPullRequest {
     required String patchUrl,
   }) = _JsonPullRequest;
 
-  factory JsonPullRequest.fromJson(Map<String, dynamic> json) =>
-      _$JsonPullRequestFromJson(json);
+  factory JsonPullRequest.fromJson(Map<String, dynamic> json) => _$JsonPullRequestFromJson(json);
 }
 
 enum JsonState { open, closed, all }
